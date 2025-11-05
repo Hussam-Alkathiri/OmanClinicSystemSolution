@@ -1,0 +1,27 @@
+--CREATE DATABASE OmanClinic;
+--USE OmanClinic;
+CREATE TABLE Patient (
+PatientID bigint primary key  identity(1,1),
+Name nvarchar(60) NOT NULL,
+NationalID int UNIQUE not null,
+PhoneNumber int unique not null
+);
+
+CREATE TABLE Doctor (
+DoctorID bigint primary key  identity(1,1),
+Name NVARCHAR(60) NOT NULL,
+Specialty NVARCHAR(70) NOT NULL,
+PhoneNumber INT NOT NULL
+);
+
+CREATE TABLE Appointment (
+AppointmentID bigint primary key  identity(1,1),
+AppointmentDate DATE NOT NULL,
+PatientID BIGINT,
+DoctorID BIGINT
+CONSTRAINT FK_PATIENT FOREIGN KEY (PatientID)
+REFERENCES Patient(PatientID),
+
+CONSTRAINT FK_Doctor FOREIGN KEY (DoctorID)
+REFERENCES Doctor(DoctorID)
+);
